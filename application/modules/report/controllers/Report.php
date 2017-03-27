@@ -9,6 +9,7 @@ class Report extends MY_Controller {
 	public function index(){
 		$xdata['action'] = 'report/search'.get_query_string();
 		$xdata['report_status'] = $this->report_model->status();
+		$xdata['total_dialed'] = number_format($this->report_model->total_dialed());
 		$data['content'] = $this->load->view('report',$xdata,true);
 		$this->load->view('template',$data);
 	}

@@ -31,6 +31,7 @@ class Import extends MY_Controller {
 				$i=2;
 				while(trim($active_sheet->getCell('A'.$i)->getValue())<>''){
 					$data[] = array(
+						'event'=>$this->event['id'],
 						'serial'=>trim($active_sheet->getCell('A'.$i)->getValue()),
 						'name'=>trim($active_sheet->getCell('B'.$i)->getValue()),
 						'title'=>trim($active_sheet->getCell('C'.$i)->getValue()),
@@ -46,12 +47,12 @@ class Import extends MY_Controller {
 						'email'=>trim($active_sheet->getCell('M'.$i)->getValue()),
 						'web'=>trim($active_sheet->getCell('N'.$i)->getValue()),
 						'date_create'=>date('Y-m-d H:i:s'),
-						'user_create'=>$this->user_login['id'],
+						'user_create'=>$this->user_login['id']
 					);
 					$i++;
 				}
 				$this->import_model->import($data);
-				$this->session->set_flashdata('alert','<div class="alert alert-success">Import : <b>'.($i-3).'</b> Data Completed!!!</div>');
+				$this->session->set_flashdata('alert','<div class="alert alert-success">Import : <b>'.($i-2).'</b> Data Completed!!!</div>');
 			}else{
 				$this->session->set_flashdata('alert','<div class="alert alert-danger">Warning : Excel Value Failed!!!</div>');					
 			}

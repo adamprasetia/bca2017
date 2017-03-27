@@ -21,18 +21,20 @@ class Interview_model extends CI_Model
 		$this->db->where('id',$id);
 		$this->db->update('candidate',$data);
 	}
-	public function get_priority($event,$code){
-		$this->db->from('actcode A');
-		$this->db->where('A.event',$event);
-		$this->db->where('A.code',$code);
-		return $this->db->get()->row();
-	}
 	public function get_candidate($id){
-		$this->db->select('A.*,C.name as interviewer');
+		$this->db->select('A.*,C.name as interviewer_name');
 		$this->db->from('candidate A');
 		$this->db->join('user C','A.interviewer = C.id','left');
 		$this->db->where('A.id',$id);
 		return $this->db->get()->row();
+	}
+	public function get_related($candidate = '',$interviewer = '',$co = ''){
+		$this->db->from('candidate a');
+		$this->db->where('a.co like "%'.$co.'%"');
+		$this->db->where('a.event',$this->event['id']);
+		$this->db->where('a.interviewer',$interviewer);
+		$this->db->where('a.id <>',$candidate);
+		return $this->db->get()->result();
 	}
 	public function set_callhis($data){
 		$this->db->insert('call_history',$data);		
@@ -82,6 +84,7 @@ class Interview_model extends CI_Model
 		$audit = $this->input->get('audit');
 		$proses = $this->input->get('proses');
 
+		$data[] = $this->db->where('A.event',$this->event['id']);
 		$interviewer = $this->input->get('interviewer');
 		if($status <> ''){
 			$data[] = $this->db->where('A.status',$status);
@@ -145,30 +148,4 @@ class Interview_model extends CI_Model
 		}
 		return $data;
 	}	
-	public function city_f2f_dropdown(){
-		$result = $this->db->get('city')->result();
-		$data[''] = '- City F2f -';
-		foreach($result as $r){
-			$data[$r->id] = $r->city;
-		}
-		return $data;
-	}	
-	public function get_city_by_id($id){
-		$this->db->where('id',$id);
-		$this->db->limit(1);
-		$result = $this->db->get('city');
-		if ($result->num_rows() > 0) {
-			return $result->row();
-		}else{
-			return "";
-		}
-	}
-	public function get_city_list(){
-		$result = $this->db->get('city');		
-		if ($result->num_rows() > 0) {
-			return $result->result();
-		}else{
-			return false;
-		}
-	}
 }

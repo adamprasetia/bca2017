@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `call_history` (
 -- Dumping structure for table bca2017.candidate
 CREATE TABLE IF NOT EXISTS `candidate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `event` int(11) NOT NULL DEFAULT '0',
   `status` tinyint(4) NOT NULL,
   `valid` tinyint(4) NOT NULL,
   `audit` tinyint(4) NOT NULL,
@@ -58,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `candidate` (
   `register` tinyint(4) NOT NULL,
   `invite` tinyint(4) NOT NULL,
   `partner` tinyint(4) NOT NULL,
+  `remark` text NOT NULL,
   `send_email` varchar(100) NOT NULL,
   `user_create` int(11) NOT NULL,
   `date_create` datetime NOT NULL,
@@ -83,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `candidate_status` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table bca2017.candidate_status: ~18 rows (approximately)
+-- Dumping data for table bca2017.candidate_status: ~17 rows (approximately)
 /*!40000 ALTER TABLE `candidate_status` DISABLE KEYS */;
 INSERT INTO `candidate_status` (`id`, `name`, `parent`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
 	(1, 'Connect', 0, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
@@ -107,6 +109,29 @@ INSERT INTO `candidate_status` (`id`, `name`, `parent`, `user_create`, `date_cre
 /*!40000 ALTER TABLE `candidate_status` ENABLE KEYS */;
 
 
+-- Dumping structure for table bca2017.event
+CREATE TABLE IF NOT EXISTS `event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `place` varchar(50) NOT NULL,
+  `date` varchar(50) NOT NULL,
+  `web` varchar(50) NOT NULL,
+  `pre_register` varchar(50) NOT NULL,
+  `user_create` int(11) NOT NULL,
+  `date_create` datetime NOT NULL,
+  `user_update` int(11) NOT NULL,
+  `date_update` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table bca2017.event: ~2 rows (approximately)
+/*!40000 ALTER TABLE `event` DISABLE KEYS */;
+INSERT INTO `event` (`id`, `name`, `place`, `date`, `web`, `pre_register`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
+	(1, 'Broadcast Asia 2017', 'Suntec Singapore', '23 sd 25 Mei 2017', 'www.Broadcast-Asia.com', 'www.Broadcast-Asia.com/pre-registration', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00'),
+	(2, 'Communic Asia 2017 dan Enterprise IT 2017', 'Marina Bay Sands Singapore', '23 sd 25 Mei 2017', '', '', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `event` ENABLE KEYS */;
+
+
 -- Dumping structure for table bca2017.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -124,13 +149,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `date_update` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table bca2017.user: ~6 rows (approximately)
+-- Dumping data for table bca2017.user: ~2 rows (approximately)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `name`, `username`, `password`, `level`, `ip_login`, `date_login`, `user_agent`, `status`, `user_create`, `date_create`, `user_update`, `date_update`) VALUES
-	(1, 'Adam Prasetia', 'damz', '202cb962ac59075b964b07152d234b70', 1, '::1', '2017-03-24 19:24:38', 'Windows 7(Google Chrome 56.0.2924.87)', 1, 0, '0000-00-00 00:00:00', 12, '2016-02-01 23:44:22'),
-	(2, 'Teguh Santoso', 'teguh', 'e2f9f842fd8e1ae90dc428d39cab7167', 1, '127.0.0.1', '2016-02-01 17:11:28', 'Windows 7(Google Chrome 48.0.2564.97)', 1, 1, '2016-02-01 17:07:02', 0, '0000-00-00 00:00:00');
+	(1, 'Adam Prasetia', 'damz', '202cb962ac59075b964b07152d234b70', 1, '::1', '2017-03-26 15:02:43', 'Windows 7(Google Chrome 56.0.2924.87)', 1, 0, '0000-00-00 00:00:00', 12, '2016-02-01 23:44:22'),
+	(2, 'Teguh Santoso', 'teguh', 'e2f9f842fd8e1ae90dc428d39cab7167', 1, '127.0.0.1', '2016-02-01 17:11:28', 'Windows 7(Google Chrome 48.0.2564.97)', 1, 1, '2016-02-01 17:07:02', 0, '0000-00-00 00:00:00'),
+	(3, 'Jaka Suci Ramadhani', 'jack', '202cb962ac59075b964b07152d234b70', 3, '::1', '2017-03-26 11:04:04', 'Windows 7(Google Chrome 56.0.2924.87)', 1, 0, '2017-03-25 13:16:17', 0, '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 

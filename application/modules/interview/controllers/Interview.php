@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Interview extends MY_Controller {
+	
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('master/master_model');
@@ -81,6 +82,10 @@ class Interview extends MY_Controller {
 		if($this->form_validation->run()===false){
 			$xdata['greeting'] 		= 'Selamat '.(date('G')<10?'pagi':(date('G')<15?'siang':'sore'));
 			$xdata['candidate'] 	= $this->interview_model->get_candidate($id);
+			$xdata['related'] = array();
+			if ($xdata['candidate']->co) {
+				$xdata['related'] 		= $this->interview_model->get_related($xdata['candidate']->id,$xdata['candidate']->interviewer,$xdata['candidate']->co);
+			}
 			$xdata['candidate']->tel = str_replace(array(' ','-'), '', $xdata['candidate']->tel);
 			$xdata['candidate']->mobile = str_replace(array(' ','-'), '', $xdata['candidate']->mobile);
 			$xdata['breadcrumb']	= 'interview'.get_query_string();
@@ -104,7 +109,8 @@ class Interview extends MY_Controller {
 				'know'=>$this->input->post('know'),
 				'register'=>$this->input->post('register'),
 				'invite'=>$this->input->post('invite'),
-				'partner'=>$this->input->post('partner')
+				'partner'=>$this->input->post('partner'),
+				'remark'=>$this->input->post('remark')
 			);
 			$this->interview_model->phone($id,$data);
 			$this->session->set_flashdata('alert','<div class="alert alert-success">Data has been saved</div>');
@@ -125,7 +131,7 @@ class Interview extends MY_Controller {
 				$data['fullname'] = $this->interview_model->get_name_by_id($id);
 			}
 			$data['telemarketer'] = $this->user_login['name'];
-			$content = $this->load->view('email',$data,true);
+			$content = $this->load->view('email_'.$this->event['id'],$data,true);
 			
 			$this->load->library('email');
 

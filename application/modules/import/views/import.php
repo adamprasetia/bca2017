@@ -20,7 +20,7 @@
 		</div>
 		<div class="box-footer">
 			<button class="btn btn-primary btn-sm" type="submit"><span class="glyphicon glyphicon-import"></span> Import</button>
-			&nbsp;|&nbsp;<?php echo anchor(base_url().'files/bca2017_import_tmp.xlsx','Download Template');?>
+			&nbsp;|&nbsp;<?php echo anchor(base_url().'files/sesallworld2017_import_tmp.xlsx','Download Template');?>
 		</div>
 	</div>
 	<?php echo form_close()?>

@@ -20,6 +20,10 @@
 			<?php echo validation_errors() ?>
 			<?php echo form_open('login') ?>
 			<div class="form-group has-feedback">
+				<?php echo form_dropdown('event',$this->master_model->dropdown('event','Event'),set_value('event',''),'required=required class="form-control input-sm"'); ?>
+			</div>
+			<hr>
+			<div class="form-group has-feedback">
 				<input type="text" class="form-control" placeholder="Username" name="username">
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			</div>
@@ -30,7 +34,7 @@
 			<div class="row">
 				<div class="col-xs-8"></div>
 				<div class="col-xs-4">
-					<button type="submit" class="btn btn-danger btn-block btn-flat">Login</button>
+					<button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
 				</div>
 			</div>
 			<?php echo form_close() ?>      

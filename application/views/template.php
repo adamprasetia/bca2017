@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<title><?php echo APP_NAME ?></title>
+	<title><?php echo $this->event['name'] ?></title>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('../assets/bootstrap-3.3.5-dist/css/bootstrap.min.css')?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('../assets/jquery-ui-1.11.2/jquery-ui.css')?>"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('../assets/AdminLTE-2.3.0/css/AdminLTE.css')?>"/>
@@ -18,7 +18,7 @@
 </head>
 <body class="hold-transition skin-black sidebar-mini fixed">
   <header class="main-header">
-    <?php echo anchor('home','<span class="logo-mini"><b>'.APP_NAME.'</b></span><span class="logo-lg">'.APP_NAME.'</span>',array('class'=>'logo')) ?>
+    <?php echo anchor('home','<span class="logo-mini"><b>'.APP_ALIAS.'</b></span><span class="logo-lg">'.$this->event['name'].'</span>',array('class'=>'logo')) ?>
     <nav class="navbar navbar-static-top" role="navigation">
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -80,10 +80,11 @@
         <li class="treeview <?php echo active_menu('distribution')?>"><?php echo anchor('distribution','<i class="fa fa-cubes"></i> <span>Distribution</span>')?></li>
         <?php endif ?>
         <li class="treeview <?php echo active_menu('interview')?>"><?php echo anchor('interview','<i class="fa fa-phone"></i> <span>Interview</span>')?></li>
-        <?php if (1==2 && ($this->user_login['level']==1 || $this->user_login['level']==2)): ?>
+        <?php if ($this->user_login['level']==1 || $this->user_login['level']==2): ?>
         <li class="treeview <?php echo active_menu('export')?>"><?php echo anchor('export','<i class="fa fa-cloud-download"></i> <span>Export Data</span>')?></li>
-        <li class="treeview <?php echo active_menu('report')?>"><?php echo anchor('report','<i class="fa fa-bar-chart"></i> <span>Report</span>')?></li>
+        <li class="treeview <?php echo active_menu('report')?>"><?php echo anchor('report','<i class="fa fa-bar-chart"></i> <span>Report</span>')?></li>        
         <?php endif ?>
+        <li class="treeview <?php echo active_menu('doc')?>"><?php echo anchor('doc/index/'.$this->event['id'],'<i class="fa fa-book"></i> <span>Documentation</span>')?></li>
       </ul>
     </section>
   </aside>
