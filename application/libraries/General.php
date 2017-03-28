@@ -61,4 +61,14 @@ class General{
 		}
 		return $data;
 	}
+	function callhis($id = '')
+	{		
+		$this->ci->load->model('interview/callhis_model');
+		$data = array();
+		$result = $this->ci->callhis_model->get($id);
+		foreach ($result as $row) {
+			array_push($data, $row->status);
+		}
+		return $data;
+	}	
 }

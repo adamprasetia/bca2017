@@ -30,12 +30,13 @@ class Interview extends MY_Controller {
 		foreach($head_data as $r => $value){
 			$heading[] = anchor('interview'.get_query_string(array('order_column'=>"$r",'order_type'=>$this->general->order_type($r))),"$value ".$this->general->order_icon("$r"));
 		}		
-		$heading[] = 'Action';
+		$heading[] = array('data'=>'Action','style'=>'min-width:120px');
 		$this->table->set_heading($heading);
 		$result = $this->interview_model->get()->result();
 		$i=1+$offset;
 		foreach($result as $r){
 			$count_call = $this->interview_model->count_call($r->id);
+			$callhis = $this->general->callhis($r->id);
 			$this->table->add_row(
 				$i++,
 				anchor('interview/phone/'.$r->id.get_query_string(),$r->serial).($r->valid==1?' <span class="label label-success">Valid</span>':'').($r->audit==1?' <span class="label label-primary">Audit</span>':''),
@@ -45,7 +46,7 @@ class Interview extends MY_Controller {
 				($r->email_new?$r->email_new:$r->email).' '.($r->send_email?'<span title="'.$r->send_email.'" class="glyphicon glyphicon-envelope"></span>':''),
 				$r->status_name,
 				$r->interviewer,
-				$this->callhis_model->get_note($r->id),
+				implode(',',$callhis),
 				anchor('interview/phone/'.$r->id.get_query_string(),'Phone'.($count_call > 0?' <span class="label label-success">'.$count_call.' <span class="glyphicon glyphicon-earphone"></span></span>':''))
 			);
 		}

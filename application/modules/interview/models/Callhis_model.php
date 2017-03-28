@@ -17,14 +17,4 @@ class Callhis_model extends CI_Model {
 		$this->db->order_by('date','asc');		
 		return $this->db->get('call_history')->result();
 	}
-	public function get_note($id){
-		$this->db->where('candidate',$id);		
-		$this->db->order_by('date','asc');		
-		$result = $this->db->get('call_history')->result();
-		$str = '';
-		foreach($result as $r){
-			$str .= $r->status.', ';
-		}
-		return $str;
-	}
 }
