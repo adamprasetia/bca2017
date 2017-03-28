@@ -60,7 +60,7 @@ class Interview_model extends CI_Model
 			$this->db->where('A.interviewer',$this->user_login['id']);
 			$this->db->where('A.audit','0');			
 		}
-		$this->db->order_by($this->general->get_order_column('A.ID'),$this->general->get_order_type('desc'));
+		$this->db->order_by($this->general->get_order_column('A.ID'),$this->general->get_order_type('asc'));
 		$this->db->limit($this->general->get_limit());
 		$this->db->offset($this->general->get_offset());
 		return $this->db->get();
