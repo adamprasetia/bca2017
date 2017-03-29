@@ -44,6 +44,7 @@
 				</div>	
 				<div class="box-body">
 					<h3><?php echo $greeting; ?>. Bisa berbicara dengan <strong><?php echo $candidate->name; ?></strong></h3>
+					<p class="info"><?php echo $greeting_english; ?>. May I speak with <strong><?php echo $candidate->name; ?></strong> please?</p>
 					<table class="table table-bordered">
 						<tr>
 							<td>
@@ -65,34 +66,32 @@
 						</tr>
 					</table>
 					<div class="info">
-						<?php if ($candidate->title == ''): ?>
-							<p>Cari Pegawai dengan title : </p>
-							<?php if ($this->event['id']=='1'){ ?>
-							<ol>
-								<li>Corporate Management<br>
-								Eg. CEO, Managing Director, General Manager</li>
-								<li>Engineering Management<br>
-								Eg. Head of Engineering, Chief Engineer</li>
-								<li>Technical Management<br>
-								Eg. Head of Technical</li>
-								<li>Operations Management<br>
-								Eg: Head of Operations, Production Manager / Post Production Manager</li>
-								<li>Digital Media / New Media</li>
-								<li>Human Resource</li>
-							</ol>
-							<?php }else if ($this->event['id']=='2'){ ?>
-							<ol>
-								<li>IT / Technology Management<br>
-								E.g. CIO, CTO, Head of IT, IT Director, IT Manager</li>
-								<li>Corporate Management<br>
-								Eg. President, CEO, Managing Director</li>
-								<li>Operations Management<br>
-								E.g. COO, Head of Operations, Operations Director, Operations Manager</li>
-								<li>Purchasing / Procurement</li>
-								<li>Human Resource</li>
-							</ol>
-							<?php } ?>
-						<?php endif ?>
+						<p>Cari Pegawai dengan title : </p>
+						<?php if ($this->event['id']=='1'){ ?>
+						<ol>
+							<li>Corporate Management<br>
+							Eg. CEO, Managing Director, General Manager</li>
+							<li>Engineering Management<br>
+							Eg. Head of Engineering, Chief Engineer</li>
+							<li>Technical Management<br>
+							Eg. Head of Technical</li>
+							<li>Operations Management<br>
+							Eg: Head of Operations, Production Manager / Post Production Manager</li>
+							<li>Digital Media / New Media</li>
+							<li>Human Resource</li>
+						</ol>
+						<?php }else if ($this->event['id']=='2'){ ?>
+						<ol>
+							<li>IT / Technology Management<br>
+							E.g. CIO, CTO, Head of IT, IT Director, IT Manager</li>
+							<li>Corporate Management<br>
+							Eg. President, CEO, Managing Director</li>
+							<li>Operations Management<br>
+							E.g. COO, Head of Operations, Operations Director, Operations Manager</li>
+							<li>Purchasing / Procurement</li>
+							<li>Human Resource</li>
+						</ol>
+						<?php } ?>
 					</div>
 					<div class="checkbox">
 						<label>
@@ -129,6 +128,7 @@
 			<div class="box box-minute hide">
 				<div class="box-body form-inline">
 					<h3><?php echo $greeting; ?>, <strong><?php echo $candidate->name; ?></strong>. Nama saya <strong><?php echo $this->user_login['name'] ?></strong> dan saya mewakili UBM SES, penyelenggara <strong><?php echo $this->event['name'] ?></strong> di <strong><?php echo $this->event['place'] ?></strong>. Apakah Anda punya waktu beberapa menit?</h3>
+					<p class="info"><?php echo $greeting_english; ?>, <strong><?php echo $candidate->name; ?></strong>. My name is <strong><?php echo $this->user_login['name'] ?></strong> and I am calling on behalf of UBM SES, organiser of <strong><?php echo $this->event['name'] ?></strong> in Singapore. May I have a few minutes of your time?</p>
 					<label>Jawaban :</label>
 					<?php echo form_dropdown('minute',array(''=>'','1'=>'Ya','2'=>'Tidak'),set_value('minute',$candidate->minute),'id="minute" class="form-control"') ?>
 				</div>
@@ -140,6 +140,7 @@
 			<div class="box box-know hide">
 				<div class="box-body form-inline">
 					<h3>Bisakah saya mengetahui apakah anda mengetahui Event <strong><?php echo $this->event['name'] ?></strong> yang akan diadakan tanggal <strong><?php echo $this->event['date'] ?></strong> di <strong><?php echo $this->event['place'] ?></strong> ?</h3>
+					<p class="info">May I know if you are aware of <strong><?php echo $this->event['name'] ?></strong> which is happening from 23 – 25 May at <strong><?php echo $this->event['place'] ?></strong>?</p>
 					<label>Jawaban :</label>
 					<?php echo form_dropdown('know',array(''=>'','1'=>'Ya','2'=>'Tidak'),set_value('know',$candidate->know),'id="know" class="form-control"') ?>
 				</div>
@@ -147,6 +148,7 @@
 			<div class="box box-register hide">
 				<div class="box-body form-inline">
 					<h3>Bagus! Apakah Anda sudah pre-registered (mendaftar) kunjungan Anda ke acara tersebut?</h3>
+					<p class="info">That's great! Have you pre-registered your visit to shows?</p>
 					<label>Jawaban :</label>
 					<?php echo form_dropdown('register',array(''=>'','1'=>'Ya','2'=>'Tidak'),set_value('register',$candidate->register),'id="register" class="form-control"') ?>
 				</div>
@@ -154,9 +156,11 @@
 			<div class="box box-closing hide">
 				<div class="box-body form-inline">
 					<h3>Terima kasih atas support & waktunya. Harap ingat untuk membawa email konfirmasi Anda untuk koleksi badge/lencana. Jika Anda ingin kami mengirimkan reminder/pengingat mendekati event, Anda dapat memberikan saya nomor ponsel/hp Anda dan kami akan mengirimkan SMS pengingat.</h3>
+					<p class="info">Thank you for your support & time. Please remember to bring along your confirmation email for your badge collection.  If you would like us to send you a reminder closer to the show, you can provide me your mobile number and we will send you an SMS reminder.</p>
 					<label>Nomor Ponsel :</label>
 					<input type="text" name="mobile_new" class="form-control" maxlength="50" size="30" autocomplete="off" value="<?php echo set_value('mobile_new',(isset($candidate->mobile_new)?$candidate->mobile_new:'')) ?>">
              		<h3>Sampai jumpa di acara tersebut! </h3>
+             		<p class="info">See you at the event!</p>
 				</div>
 				<div class="box-footer">
 					<p class="info">Nomor Ponsel Sebelumnya : <b><?php echo $candidate->mobile; ?></b></p>
@@ -168,16 +172,19 @@
 					<?php if ($this->event['id'] == 1): ?>
 						<h3>BroadcastAsia2017 adalah pameran benar-benar nyata internasional di Asia yang diakui sebagai jaringan, pengetahuan dan platform sourcing untuk industri pro-audio, film dan TV. </h3>
 						<h3>Profesional dari seluruh Negara/wilayah akan berkumpul untuk jaringan, ide bisnis pertukaran, mengumpulkan informasi pasar dan sumber untuk produk terbaru dan solusi. Berharap untuk bertemu terkemuka peserta pameran internasional.</h3>
+						<p class="info">BroadcastAsia2017 is Asia's truly international exhibition that is recognised as THE networking, knowledge and sourcing platform for the pro-audio, film and TV industries. Professionals from around the region will congregate to network, exchange business ideas, gather market information and source for the latest products and solutions. Expect to meet leading international exhibitors.</p>
 					<?php else: ?>
 						<h3>CommunicAsia2017 adalah acara teknologi info-komunikasi terbesar dan terlengkap.</h3>
 						<h3>Ini akan diselenggarakan pada 23 - 25 Mei 2017 (Selasa sd Kamis). </h3>
 						<h3>3 hari acara akan menampilkan sekitar 1.200 peserta dari sekitar 49 negara. Teknologi tren kunci untuk tahun ini termasuk Borderless Broadband, Connect Everywhere, Cloud & Big Data, Enterprise Mobility, IOT, SatComm, Security & Cyber-Security dan Smart Cities</h3>
+						<p class="info">CommunicAsia2017 is Asia's largest and most comprehensive info-communications technology event. It will be held from 23 – 25 May 2017 (Tue to Thu). The 3-day show will feature around 1,200 exhibitors from around 49 countries. Key trending technologies for this year include Borderless Broadband, Connect Everywhere, Cloud & Big Data, Enterprise Mobility, IoT, SatComm, Security & Cyber-Security and Smart Cities </p>
 					<?php endif ?>
 				</div>
 			</div>
 			<div class="box box-invite hide">
 				<div class="box-body form-inline">
 					<h3>Dapatkah saya email kepada Anda undangan untuk menghadiri <strong><?php echo $this->event['name'] ?></strong> dengan informasi acara dan link ke pra-mendaftar secara online?</h3>
+					<p class="info">Can I email to you the invitation to attend <strong><?php echo $this->event['name'] ?></strong> along with the event information and a link to pre-register online? </p>
 					<label>Jawaban :</label>
 					<?php echo form_dropdown('invite',array(''=>'','1'=>'Ya','2'=>'Tidak'),set_value('invite',$candidate->invite),'id="invite" class="form-control"') ?>
 				</div>
@@ -198,16 +205,21 @@
 				<div class="box-header"></div>
 				<div class="box-body form-inline">
 					<h3>Jika Anda tertarik untuk mengunjungi acara, silakan pra-mendaftar kunjungan Anda online di <?php echo $this->event['web'] ?> sebelum 15 Mei 2017.</h3>
+					<p class="info">If you are interested to visit the show, please pre-register your visit online at <?php echo $this->event['web'] ?> before 15 May 2017. </p>
 					<h3>Apakah anda juga ingin membawa rekan Anda dan teman-teman di industri untuk pertunjukan?</h3>
+					<p class="info">Do also bring along your colleagues and friends in the industry to the show as ?</p>
 					<label>Jawaban :</label>
 					<?php echo form_dropdown('partner',array(''=>'','1'=>'Ya','2'=>'Tidak'),set_value('partner',$candidate->partner),'id="partner" class="form-control"') ?>					
 					<h3>Kami yakin bahwa itu akan relevan dan bermanfaat untuk bisnis mereka juga. Rekan Anda dapat juga pra-mendaftar secara online.</h3>
+					<p class="info">I am sure that it will be relevant and beneficial to their work as well. Your colleagues can also pre-register online.</p>
 					<h3>Harap menyimpan email yang saya akan kirimkan kepada Anda segera. Terima kasih lagi dan kami berharap untuk bisa bertemu Anda kembali.</h3>
+					<p class="info">Please keep a look out for the email that I will be sending to you shortly. Thank you again and we look forward to see you.</p>
 				</div>
 			</div>
 			<div class="box box-not-interest hide">
 				<div class="box-body form-inline">
 					<h3>Terima kasih untuk waktu Anda & have a nice day.</h3>
+					<p class="info">Thank you for your time & have a nice day.</p>
 				</div>
 			</div>
 		</div>

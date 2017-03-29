@@ -81,8 +81,9 @@ class Interview extends MY_Controller {
 	public function phone($id){
 		$this->form_validation->set_rules('status','Status','trim');
 		if($this->form_validation->run()===false){
-			$xdata['greeting'] 		= 'Selamat '.(date('G')<10?'pagi':(date('G')<15?'siang':'sore'));
-			$xdata['candidate'] 	= $this->interview_model->get_candidate($id);
+			$xdata['greeting'] = 'Selamat '.(date('G')<10?'pagi':(date('G')<15?'siang':'sore'));
+			$xdata['greeting_english'] = 'Good '.(date('G')<10?'morning':(date('G')<15?'afternoon':'afternoon'));
+			$xdata['candidate'] = $this->interview_model->get_candidate($id);
 			$xdata['related'] = array();
 			if ($xdata['candidate']->co) {
 				$xdata['related'] 		= $this->interview_model->get_related($xdata['candidate']->id,$xdata['candidate']->interviewer,$xdata['candidate']->co);
